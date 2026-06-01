@@ -24,6 +24,6 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_IDS: ${{ secrets.CHAT_IDS }}
-          POLL_QUESTION: ${{ secrets.POLL_QUESTION }}
-          POLL_OPTIONS: ${{ secrets.POLL_OPTIONS }}
+          POLL_QUESTION: ${{ vars.POLL_QUESTION }}
+          POLL_OPTIONS: ${{ vars.POLL_OPTIONS }}
         run: python main.py
