@@ -1,0 +1,29 @@
+name: Daily Poll
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # 05:00 UTC - 08:00 MSK
+  workflow_dispatch:
+
+jobs:
+  send-poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send Poll
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_IDS: ${{ secrets.CHAT_IDS }}
+          POLL_QUESTION: ${{ secrets.POLL_QUESTION }}
+          POLL_OPTIONS: ${{ secrets.POLL_OPTIONS }}
+        run: python main.py
